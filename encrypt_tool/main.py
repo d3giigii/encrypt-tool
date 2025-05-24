@@ -215,5 +215,5 @@ def main():
     # Thank user. 
     print("\nThank you for using Encrypt-Tool!\n")
 
-if __name__ == "__main__":
+def cli():
     main()
