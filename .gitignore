@@ -1,0 +1,11 @@
+# Ignore virtual environment. 
+.venv/
+
+# Ignore packaging files.
+encrypt_tool.egg-info/
+
+# Ignore __pycache__. 
+encrypt_tool/__pycache__/
+
+# Ignore dist. 
+dist/
