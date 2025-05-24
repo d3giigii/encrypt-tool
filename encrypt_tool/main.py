@@ -3,10 +3,10 @@ import os
 from Cryptodome.Cipher import AES
 from Cryptodome.Random import get_random_bytes
 
-# TODO: Make linter happy. 
-# TODO: Verify docstrings are correct. 
+# TODO: Create and read files from a working directory rather than the parent. 
 # TODO: Verify proper error handling. 
-# TODO: Create and read files from a working directory rather than parent. 
+# TODO: Verify docstrings are correct.
+# TODO: Make linter happy. 
 
 def display_menu():
     """Display the menu to user in the CLI."""
