@@ -9,3 +9,9 @@ encrypt_tool/__pycache__/
 
 # Ignore dist. 
 dist/
+
+# Ignore working files
+aes.key
+message.txt
+message_encrypted.bin
+message_decrypted.txt
