@@ -190,7 +190,7 @@ def cleanup_files():
 
 def main():
     # Welcome user. 
-    print("\nWelcome to Encryt-Tool!")    
+    print("\nWelcome to Encrypt-Tool!")    
 
     # Enter main program loop.
     while True:
