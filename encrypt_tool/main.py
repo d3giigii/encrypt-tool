@@ -6,6 +6,7 @@ from Cryptodome.Random import get_random_bytes
 # TODO: Make linter happy. 
 # TODO: Verify docstrings are correct. 
 # TODO: Verify proper error handling. 
+# TODO: Create and read files from a working directory rather than parent. 
 
 def display_menu():
     """Display the menu to user in the CLI."""
