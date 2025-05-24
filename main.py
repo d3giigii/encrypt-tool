@@ -3,6 +3,10 @@ import os
 from Cryptodome.Cipher import AES
 from Cryptodome.Random import get_random_bytes
 
+# TODO: Make linter happy. 
+# TODO: Verify docstrings are correct. 
+# TODO: Verify proper error handling. 
+
 def display_menu():
     """Display the menu to user in the CLI."""
     
@@ -75,7 +79,6 @@ def get_menu_input() -> int:
     except Exception:
         print("Error: Invalid input. Try again.")
 
-    # TODO: Linter is making raw red. Should be yellow if anything. 
     return raw
 
 def create_file():
