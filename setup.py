@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="",
-    version="",
-    author="",
-    description="",
+    name="encrypt-tool",
+    version="1.0.0",
+    author="Logan Hammond",
+    description="A simple AES encryption/decryption CLI tool",
     packages=find_packages(),
     # Read from requirements.txt
     install_requires=[
