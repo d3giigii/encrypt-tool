@@ -1,3 +1,8 @@
+import os
+
+from Cryptodome.Cipher import AES
+from Cryptodome.Hash import HMAC, SHA256
+from Cryptodome.Random import get_random_bytes
 
 def display_menu():
     """Display the menu to user in the CLI."""
@@ -17,7 +22,24 @@ def sanitize(txt):
     INVALID_CHARS = [';', '|', '&', "\"", "\'"]
     return "".join([i for i in str(txt) if not i in INVALID_CHARS])
 
+def get_input(txt):
+    raw = int
+    try:
+        # Get input from user. 
+        raw = input(f"{txt}").strip()
+        raw = sanitize(raw)
+        
+        # Schema validation. 
+        
 
+        # Logic validation. 
+
+
+    except Exception:
+        print("Error: Invalid input. Try again.")
+
+    # TODO: Linter is making raw red. Should be yellow if anything. 
+    return raw
 
 def get_menu_input() -> int:
     """Retrieve choice from user in the CLI.
@@ -60,6 +82,31 @@ def create_file():
 
 def encrypt_file():
     print("Encrypt file selected.")
+
+    message = get_input("Enter message: ")
+
+    # Create file with cleartext message. 
+    with open("message_clear.txt", "w+") as file:
+        file.writelines(message)
+
+    # Encrypt contents of cleartext message. 
+    data = message.encode()
+
+    # Generate keys. 
+    aes_key = get_random_bytes(16)
+    hmac_key = get_random_bytes(16)
+    
+    # Encrypt message. 
+    cipher = AES.new(aes_key, AES.MODE_CTR)
+    cipher_text = cipher.encrypt(data)
+    hmac = HMAC.new(hmac_key, digestmod=SHA256)
+    hmac_tag = hmac.update(cipher.nonce + cipher_text).digest()
+
+    # Save encrypted message. 
+    with open("message_encrypted.bin", "wb") as file:
+        file.write(hmac_tag)
+        file.write(cipher.nonce)
+        file.write(cipher_text)
 
 def decrypt_file():
     print("Decrypt file selected.")
