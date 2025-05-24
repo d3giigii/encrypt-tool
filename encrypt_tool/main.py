@@ -24,6 +24,8 @@ def display_menu():
 
 def is_valid_input():
     """Return True if input is valid for program schema."""
+    # TODO: Add schema and logic validation for input. 
+
     # Schema validation. 
 
     # Logic validation. 
@@ -100,20 +102,23 @@ def encrypt_file():
     file_name = get_input("Enter file name: ")
     file_data = None
 
-    # Create file with cleartext message. 
+    # Read in cleartext message. 
     with open(f"{file_name}", "r") as file:
         file_data = file.read()
 
-    # Encrypt contents of cleartext message. 
+    # Covert cleartext to bytes. 
     data = file_data.encode()
 
-    # Generate and save AES key. 
+    # Generate 128 bit (16 byte) AES key and save it for later use.  
+    # TODO: Add encryption for the key as well. 
     aes_key = get_random_bytes(16)
     with open("aes.key", "wb") as file:
         file.write(aes_key)
 
-    # Encrypt message. 
+    # Create AES cipher. OCB mode provides confidentiality and integrity. 
     cipher = AES.new(aes_key, AES.MODE_OCB)
+
+    # Encrypt message and authenticate. Cipher tag verifies integrity. 
     cipher_text, cipher_tag = cipher.encrypt_and_digest(data)
     assert len(cipher.nonce) == 15
 
