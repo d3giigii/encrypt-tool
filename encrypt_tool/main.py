@@ -8,7 +8,7 @@ and clean up working files.
 
 All operations occur in a 'working/' directiory for isolated file handling.
 
-This program should not be used in public or production environments. 
+This program should not be used in public or production environments.
 
 Author: Logan Hammond; lhammond997@gmail.com
 """
@@ -70,7 +70,7 @@ def get_menu_input() -> int:
     """Retrieve choice from user in the CLI menu.
 
     Raises:
-        ValueError: User input does pass schema or logic validation after 
+        ValueError: User input does pass schema or logic validation after
         sanitization.
 
     Returns:
@@ -102,8 +102,6 @@ def create_file(file_name: str, file_msg: str) -> None:
         None
     """
 
-    print("Create file selected.")
-
     # Ensure file name ends with .txt.
     if not (len(file_name) >= 4 and file_name[-4:] == ".txt"):
         file_name += ".txt"
@@ -126,11 +124,9 @@ def encrypt_file(file_name: str) -> None:
         FileNotFoundError: If the specified file does not exist.
     """
 
-    print("Encrypt file selected.")
-
     # Read in cleartext message.
     try:
-        with open(f"working/{file_name}.txt", "r", encoding="utf-8") as file:
+        with open(f"working/{file_name}", "r", encoding="utf-8") as file:
             file_data = file.read()
     except FileNotFoundError:
         print(f"Error: Can not find file {file_name}.")
@@ -170,8 +166,6 @@ def decrypt_file(file_name: str, key_name: str) -> None:
         authentication.
         AssertionError: If required components are not properly loaded or typed.
     """
-
-    print("Decrypt file selected.")
 
     # Load the AES key.
     try:
@@ -267,23 +261,25 @@ def main():
 
         # Process the menu choice from user.
         if user_input == 1:
+            print("Create file selected.")
             file_name = get_input("Enter file name: ")
             file_msg = get_input("Enter message: ")
             create_file(file_name, file_msg)
         elif user_input == 2:
+            print("Encrypt file selected.")
             file_name = get_input("Enter file name: ")
             encrypt_file(file_name)
         elif user_input == 3:
+            print("Decrypt file selected.")
             file_name = get_input("Enter file name: ")
             key_name = get_input("Enter key name: ")
             decrypt_file(file_name, key_name)
         elif user_input == 4:
+            print("Cleanup files selected.")
             cleanup_files()
         elif user_input == 5:
+            print("\nThank you for using Encrypt-Tool!\n")
             break
-
-    # Thank user.
-    print("\nThank you for using Encrypt-Tool!\n")
 
 def cli():
     """Hook to main for built project.
