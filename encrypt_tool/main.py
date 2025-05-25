@@ -70,7 +70,8 @@ def get_menu_input() -> int:
     """Retrieve choice from user in the CLI menu.
 
     Raises:
-        Exception: User input is not exactly a single integer.
+        ValueError: User input does pass schema or logic validation after 
+        sanitization.
 
     Returns:
         int: Sanitized user input.
