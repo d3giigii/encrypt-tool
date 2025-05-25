@@ -98,8 +98,8 @@ def create_file():
         file.writelines(message)
 
 def encrypt_file():
-    # TODO: Catch FileNotFoundError when cleartext does not have file extension
-    # but user enters a file name with an expected extension e.x. .txt.
+    # TODO: Catch FileNotFoundError when cleartext has an extension but user 
+    # enters a file name with none. 
 
     print("Encrypt file selected.")
 
