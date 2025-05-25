@@ -1,6 +1,9 @@
 # Ignore virtual environment. 
 .venv/
 
+# Ignore project files. 
+.vscode/
+
 # Ignore packaging files.
 encrypt_tool.egg-info/
 
@@ -11,7 +14,4 @@ encrypt_tool/__pycache__/
 dist/
 
 # Ignore working files
-aes.key
-message.txt
-message_encrypted.bin
-message_decrypted.txt
+working/
