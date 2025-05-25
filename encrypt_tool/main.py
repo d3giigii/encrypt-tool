@@ -8,8 +8,13 @@ and clean up working files.
 
 All operations occur in a 'working/' directiory for isolated file handling.
 
+This program should not be used in public or production environments. 
+
 Author: Logan Hammond; lhammond997@gmail.com
 """
+
+# TODO: Fix packaging and distribution.
+# TODO: Implement additional forms of encryption with customizable options.
 
 import os
 

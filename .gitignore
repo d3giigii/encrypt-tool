@@ -11,7 +11,7 @@ encrypt_tool.egg-info/
 encrypt_tool/__pycache__/
 
 # Ignore dist. 
-dist/
+dist/encrypt_tool-1.0.0-py3-none-any.whl
 
 # Ignore working files
 working/

@@ -7,6 +7,8 @@ and clean up working files.
 
 All operations occur in a 'working/' directiory for isolated file handling.
 
+This program should not be used in public or production environments. 
+
 ## Installation
 
 1. Download dist/encrypt_tool-1.0.0.tar.gz
