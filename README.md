@@ -1,6 +1,11 @@
-# Encrypt Tool
+# Encrypt Tool CLI
 
-A simple CLI tool for AES encryption and decryption using Python and OCB mode.
+This module provides a simple command-line interface for secure file encryption
+and decryption using AES-128 in OCB mode. Users can create text files, encrypt
+them with authenticated encryption, decrypt them with integrity verification,
+and clean up working files.
+
+All operations occur in a 'working/' directiory for isolated file handling.
 
 ## Installation
 
