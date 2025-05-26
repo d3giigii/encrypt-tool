@@ -17,6 +17,7 @@ Author: Logan Hammond; lhammond997@gmail.com
 # TODO: Implement additional forms of encryption with customizable options.
 # TODO: Implement non-menu usage. 
 
+import argparse
 import os
 
 from Cryptodome.Cipher import AES
@@ -242,13 +243,6 @@ def main():
         OSError: If working directory cannot be created.
     """
 
-    # Create working directory if it does not alread exist.
-    try:
-        if not os.path.exists("working/"):
-            os.makedirs("working")
-    except OSError as e:
-        print(f"Error: {e}")
-
     # Welcome user.
     print("\nWelcome to Encrypt-Tool!")
 
@@ -283,14 +277,55 @@ def main():
             print("\nThank you for using Encrypt-Tool!\n")
             break
 
-def cli():
+def parse_args():
+    parser = argparse.ArgumentParser(description="Encrypt-Tool CLI")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-i", "--input", help="Encrypt the specified file.")
+    group.add_argument("-d", "--decrypt", nargs=2, metavar=("FILE", "KEY"), help="Encrypt the specified file.")
+    group.add_argument("-c", "--cleanup", action="store_true", help="Remove all files in the working directory.")
+    group.add_argument("-m", "--menu", action="store_true", help="Run the interactive CLI menu (default).")
+    return parser.parse_args()
+
+def create_working_dir() -> None:
+    """Creates working directory if it does not exist. 
+
+    Returns:
+        None
+
+    Raises:
+        OSError: If working directory cannot be created.
+    """
+    
+    try:
+        if not os.path.exists("working/"):
+            os.makedirs("working")
+    except OSError as e:
+        print(f"Error: {e}")
+
+def cli() -> None:
     """Hook to main for built project.
 
     Returns:
         None
     """
+    
+    # Grab arguments passed from CLI. 
+    args = parse_args()
 
-    main()
+    # Verify working directory exists. 
+    create_working_dir()
+
+    # Process CLI arguments. 
+    if args.input:
+        encrypt_file(args.input)
+    elif args.decrypt:
+        file_name, key_name = args.decrypt
+        decrypt_file(file_name, key_name)
+    elif args.cleanup:
+        cleanup_files()
+    else:
+        main()
 
 if __name__ == "__main__":
+    create_working_dir()
     main()
