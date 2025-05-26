@@ -126,14 +126,15 @@ def encrypt_file(file_name: str) -> None:
 
     # Read in cleartext message.
     try:
-        with open(f"working/{file_name}", "r", encoding="utf-8") as file:
+        with open(f"working/{file_name}", "rb") as file:
             file_data = file.read()
     except FileNotFoundError:
         print(f"Error: Can not find file {file_name}.")
         return
 
     # Covert cleartext to bytes.
-    data = file_data.encode()
+    # data = file_data.encode()
+    data = file_data
 
     # Generate 128 bit (16 byte) AES key and save it for later use.
     # TODO: Add encryption for the key as well.
@@ -172,7 +173,7 @@ def decrypt_file(file_name: str, key_name: str) -> None:
         with open(f"working/{key_name}", "rb") as key_file:
             aes_key = key_file.read()
     except FileNotFoundError:
-        print("Error: No key file found. Regenerate message.")
+        print("FileNotFoundError: No key file found. Regenerate message.")
         return
 
     # Load the encrypted file.
@@ -182,15 +183,15 @@ def decrypt_file(file_name: str, key_name: str) -> None:
             cipher_tag = file.read(16)
             cipher_nonce = file.read(15)
             cipher_text = file.read()
-    except FileNotFoundError:
-        print("Error: Message file not found. Regenerate message.")
+    except FileNotFoundError as e:
+        print(f"FileNotFoundError: {e}")
         return
 
     # Decrypt the file.
     try:
         assert all([aes_key, cipher_tag, cipher_nonce, cipher_text])
     except AssertionError as e:
-        print(f"Error: {e}")
+        print(f"AssertionError: {e}")
 
     should_save_file = False
     cipher = AES.new(aes_key, AES.MODE_OCB, nonce=cipher_nonce)
@@ -198,21 +199,21 @@ def decrypt_file(file_name: str, key_name: str) -> None:
         assert isinstance(cipher_text, bytes)
         assert isinstance(cipher_tag, bytes)
         clear_text = cipher.decrypt_and_verify(cipher_text, cipher_tag)
-        print(f"Message: {clear_text.decode()}")
+        # print(f"Message: {clear_text.decode()}")
         should_save_file = True
     except AssertionError as e:
-        print(f"Error: {e}")
-    except ValueError:
-        print("Warning: The file was altered! Decrypted message will not be " \
-        "saved.")
+        print(f"AssertionError: {e}")
+    except ValueError as e:
+        print(f"ValueError: {e}")
 
     # Save decrypted message to file.
     if should_save_file:
         try:
-            with open(f"working/{file_name}_decrypted.txt", "wb") as file:
+            file_name = file_name.split(sep="_")[0]
+            with open(f"working/decrypted_{file_name}", "wb") as file:
                 file.write(clear_text)
         except PermissionError as e:
-            print(f"Error: {e}")
+            print(f"PermissionError: {e}")
 
 def cleanup_files() -> None:
     """Remove any files in working directory.
