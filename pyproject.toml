@@ -17,3 +17,6 @@ dependencies = [
 
 [project.scripts]
 encrypt-tool = "encrypt_tool.main:cli"
+
+[tool.setuptools.packages.find]
+include = ["encrypt-tool"]
