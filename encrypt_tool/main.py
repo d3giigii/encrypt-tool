@@ -277,16 +277,20 @@ def main():
             break
 
 def parse_args():
+    """Setup CLI argument parser."""
     parser = argparse.ArgumentParser(description="Encrypt-Tool CLI")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-i", "--input", help="Encrypt the specified file.")
-    group.add_argument("-d", "--decrypt", nargs=2, metavar=("FILE", "KEY"), help="Encrypt the specified file.")
-    group.add_argument("-c", "--cleanup", action="store_true", help="Remove all files in the working directory.")
-    group.add_argument("-m", "--menu", action="store_true", help="Run the interactive CLI menu (default).")
+    group.add_argument("-d", "--decrypt", nargs=2, metavar=("FILE", "KEY"),
+                       help="Encrypt the specified file.")
+    group.add_argument("-c", "--cleanup", action="store_true",
+                       help="Remove all files in the working directory.")
+    group.add_argument("-m", "--menu", action="store_true",
+                       help="Run the interactive CLI menu (default).")
     return parser.parse_args()
 
 def create_working_dir() -> None:
-    """Creates working directory if it does not exist. 
+    """Creates working directory if it does not exist.
 
     Returns:
         None
@@ -294,7 +298,7 @@ def create_working_dir() -> None:
     Raises:
         OSError: If working directory cannot be created.
     """
-    
+
     try:
         if not os.path.exists("working/"):
             os.makedirs("working")
@@ -307,14 +311,14 @@ def cli() -> None:
     Returns:
         None
     """
-    
-    # Grab arguments passed from CLI. 
+
+    # Grab arguments passed from CLI.
     args = parse_args()
 
-    # Verify working directory exists. 
+    # Verify working directory exists.
     create_working_dir()
 
-    # Process CLI arguments. 
+    # Process CLI arguments.
     if args.input:
         encrypt_file(args.input)
     elif args.decrypt:
