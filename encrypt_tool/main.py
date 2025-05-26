@@ -200,7 +200,6 @@ def decrypt_file(file_name: str, key_name: str) -> None:
         assert isinstance(cipher_text, bytes)
         assert isinstance(cipher_tag, bytes)
         clear_text = cipher.decrypt_and_verify(cipher_text, cipher_tag)
-        # print(f"Message: {clear_text.decode()}")
         should_save_file = True
     except AssertionError as e:
         print(f"AssertionError: {e}")
