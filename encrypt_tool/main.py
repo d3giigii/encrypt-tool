@@ -13,7 +13,7 @@ This program should not be used in public or production environments.
 Author: Logan Hammond; lhammond997@gmail.com
 """
 
-# TODO: Fix packaging and distribution.
+# TODO: Verify distribution of package works.
 # TODO: Implement additional forms of encryption with customizable options.
 
 import argparse
