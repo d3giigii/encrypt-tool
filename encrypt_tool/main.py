@@ -15,7 +15,6 @@ Author: Logan Hammond; lhammond997@gmail.com
 
 # TODO: Fix packaging and distribution.
 # TODO: Implement additional forms of encryption with customizable options.
-# TODO: Implement non-menu usage. 
 
 import argparse
 import os
